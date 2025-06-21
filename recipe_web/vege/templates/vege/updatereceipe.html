@@ -1,0 +1,22 @@
+{% extends "vege/base.html" %}
+{% block content %}
+    <div class="container mt-5">
+        <form class="col max-auto card p-3 shadow-lg" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Add Receipe</h2>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Receipe Name</label>
+              <input type="text" value="{{receipe.receipe_name}}" name="receipe_name" class="form-control" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Receipe Discription</label>
+              <textarea class="form-control" value="" name="receipe_description" >{{receipe.receipe_description}}</textarea>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Receipe Image</label>
+              <input type="file" name="receipe_image" value="{{receipe.receipe_image}}" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Receipe</button>
+        </form>
+    </div>
+{% endblock content %}

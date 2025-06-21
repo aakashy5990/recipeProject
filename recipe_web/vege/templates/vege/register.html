@@ -1,0 +1,42 @@
+{% extends "vege/base.html" %}
+{% block content %}
+    <div class="container mt-5">
+        <form class="col max-auto card p-3 shadow-lg" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>register</h2>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">First name</label>
+              <input type="text" name="first_name" required class="form-control" aria-describedby="emailHelp">
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Last name</label>
+              <input type="text" name="last_name" required class="form-control" aria-describedby="emailHelp">
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Username</label>
+              <input type="text" name="username" required class="form-control" aria-describedby="emailHelp">
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" name="password" required class="form-control" aria-describedby="emailHelp">
+            </div>
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="text-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <div class="button">
+              <button type="submit" class="btn btn-primary">Register</button>
+              <a href="{% url 'home' %}" class="btn btn-success">Back</a>
+            </div>
+            <p>Already have account <a href="/login/">Login</a> </p>
+          </form>
+    </div>
+{% endblock content %}

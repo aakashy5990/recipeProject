@@ -1,0 +1,52 @@
+{% extends "vege/base.html" %}
+{% block title %}
+Showing Receipe Data
+{% endblock title %}
+{% block content %}
+    <div class="container my-5">
+        <div class="col">
+            <div class="mx-auto col">
+                <form action="">
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Search Food</label>
+                    <input name="search" type="text" class="form-control">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
+        <table class="table border my-5">
+            <thead>
+              <tr>
+                <th scope="col">Sno</th>
+                <th scope="col">Receipe Name</th>
+                <th scope="col">Receipe Descriptions</th>
+                <th scope="col">Images</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+        
+            
+            <tbody>
+            {% for receipe in receipes %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{receipe.receipe_name}}</td>
+                <td>{{receipe.receipe_description}}</td>
+                <td><img src="" alt="{{ receipe.receipe_name }}" style="max-width: 100px;"></td>
+                <td class="d-flex">
+                    <form action="{% url 'delete' receipe.id %}" method="POST" >
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </form>
+                    <a href="{% url 'edit' receipe.id %}" class="btn btn-primary mx-2">Edit</a>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{% url 'home' %}" class="btn btn-primary">Back</a>
+
+    </div>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends "vege/base.html" %}
+{% block title %}
+Receipe Django Project
+{% endblock title %}
+{% block content %}
+    <div class="container mt-5">
+      {% comment %} <h5>Admin name is {{request.user}}</h5> {% endcomment %}
+      <h5>Admin name is {{request.user}}</h5>
+        <form class="col max-auto card p-3 shadow-lg" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Add Receipe</h2>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Receipe Name</label>
+              <input type="text" name="receipe_name" required class="form-control" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Receipe Discription</label>
+              <textarea class="form-control" required name="receipe_description" ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Receipe Image</label>
+              <input type="file" name="receipe_image" required class="form-control">
+            </div>
+            <div class="button">
+              <button type="submit" class="btn btn-primary">Add Receipe</button>
+              {% if request.user.is_authenticated %}
+              <a href="{% url 'showdata' %}" class="btn btn-success">Show Receipe</a>
+              <a href="{% url 'logout' %}" class="btn btn-success">Logout</a>
+              <a href="{% url 'student' %}" class="btn btn-success">Student Page</a>
+              {% else %}
+              <a href="{% url 'login' %}" class="btn btn-success">Login</a>
+              {% endif %}
+              <a href="{% url 'register' %}" class="btn btn-success">Register</a>
+            </div>
+          </form>
+    </div>
+{% endblock content %}
